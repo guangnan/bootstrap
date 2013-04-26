@@ -1241,7 +1241,7 @@
         if (offset.left < 0){
           delta = offset.left * -2
           offset.left = 0
-          $tip.offset(offset)
+          $tip.offset({ left: 0 })
           actualWidth = $tip[0].offsetWidth
           actualHeight = $tip[0].offsetHeight
         }
