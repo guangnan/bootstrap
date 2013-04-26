@@ -1133,7 +1133,7 @@
         if (defaults[key] != value) options[key] = value
       }, this)
 
-      self = $(e.currentTarget)[this.type](options).data(this.type)
+      self = this
 
       if (!self.options.delay || !self.options.delay.show) return self.show()
 
@@ -1145,7 +1145,7 @@
     }
 
   , leave: function (e) {
-      var self = $(e.currentTarget)[this.type](this._options).data(this.type)
+      var self = this
 
       if (this.timeout) clearTimeout(this.timeout)
       if (!self.options.delay || !self.options.delay.hide) return self.hide()
@@ -1182,6 +1182,9 @@
         $tip
           .detach()
           .css({ top: 0, left: 0, display: 'block' })
+
+        $tip.on('mouseenter' + '.' + this.type, this.options.selector, $.proxy(this.enter, this))
+        $tip.on('mouseleave' + '.' + this.type, this.options.selector, $.proxy(this.leave, this))
 
         this.options.container ? $tip.appendTo(this.options.container) : $tip.insertAfter(this.$element)
 
